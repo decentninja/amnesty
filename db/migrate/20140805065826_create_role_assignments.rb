@@ -2,8 +2,8 @@ class CreateRoleAssignments < ActiveRecord::Migration
   def change
     create_table :role_assignments do |t|
       t.date :expires
-      t.integereger :role_id
-      t.integereger :student_id
+      t.integer :role_id
+      t.integer :student_id
 
       t.timestamps
     end
