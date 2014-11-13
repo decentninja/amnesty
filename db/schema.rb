@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140809074934) do
+ActiveRecord::Schema.define(version: 20140812151704) do
 
   create_table "positions", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "dfunkt_id"
   end
 
   create_table "positions_roles", force: true do |t|

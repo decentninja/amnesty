@@ -1,15 +1,13 @@
 module DFUNKT
   class Positions
-    def fetch(ugid)
+    def self.fetch(ugid)
       poll_dfunkt(ugid).map do |dfunkt_id|
         Position.find_by_dfunkt_id(dfunkt_id)
-      end
+      end.reject(&:blank?)
     end
 
-    private
-
-    def poll_dfunkt(ugid)
-      [1,2,3]
+    def self.poll_dfunkt(_ugid)
+      ["ordf","vordf","info"]
     end
   end
 end

@@ -14,10 +14,18 @@ class Student < ActiveRecord::Base
     end
   end
 
+  def positions
+    Position.positions_for(ugid)
+  end
+
   def current_privileges
     privileges.current.to_a +
       roles.current.flat_map(&:current_privileges) +
       Position.positions_for(ugid).flat_map(&:privileges)
+  end
+
+  def current_privilege_names
+    current_privileges.map(&:name)
   end
 
   def as_json(_options = nil)
