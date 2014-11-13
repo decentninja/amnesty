@@ -23,6 +23,7 @@ class Role < ActiveRecord::Base
     expires ||= expires_default
     RoleAssignment.create(role: self, student: student, expires: expires)
   end
+
   def remove(student)
     assignment(student).expires = Date.yesterday
   end
@@ -33,6 +34,6 @@ class Role < ActiveRecord::Base
 
   def expires_default
     expires = Date.today.change(month: default_term_end)
-    expires + 1.year if expires < Date.today
+    expires + 1.year if expires < Date.today + 1.month
   end
 end
