@@ -1,4 +1,4 @@
-class StudentsController < ApplicationController
+class StudentsController < IndexController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
 
   # GET /students
@@ -10,15 +10,7 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
-  end
-
-  # GET /students/new
-  def new
-    @student = Student.new
-  end
-
-  # GET /students/1/edit
-  def edit
+    set_models(@student.positions, [@student], @student.roles, @student.current_privileges, Student)
   end
 
   # POST /students
@@ -48,16 +40,6 @@ class StudentsController < ApplicationController
         format.html { render action: 'edit' }
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /students/1
-  # DELETE /students/1.json
-  def destroy
-    @student.destroy
-    respond_to do |format|
-      format.html { redirect_to students_url }
-      format.json { head :no_content }
     end
   end
 

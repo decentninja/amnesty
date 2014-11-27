@@ -1,0 +1,5 @@
+<tr class="<%= mark %>">
+	<% thing.attributes.each do |key, value| %>
+		<td><%= link_to(value || "", thing) %></td>
+	<% end %>
+</tr>

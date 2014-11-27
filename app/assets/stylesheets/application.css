@@ -11,3 +11,11 @@
  *= require_self
  *= require_tree .
  */
+
+ .mark {
+ 	background-color: blue;
+ }
+
+ .topmark {
+ 	background-color: red;
+ }

@@ -1,11 +1,8 @@
-class PositionsController < ApplicationController
+class PositionsController < IndexController
 
-def index
-  @positions = Position.all
-end
-
-def show
-  @position = Position.find(params[:id])
-end
+  def show
+    position = Position.find(params[:id])
+    set_models([position], [], position.roles, position.privileges, Position)
+  end
 
 end

@@ -1,4 +1,4 @@
-class RolesController < ApplicationController
+class RolesController < IndexController
   before_action :set_role, only: [:show, :edit, :update, :destroy]
 
   # GET /roles
@@ -10,16 +10,7 @@ class RolesController < ApplicationController
   # GET /roles/1
   # GET /roles/1.json
   def show
-  end
-
-  # GET /roles/new
-  def new
-    @role = Role.new
-  end
-
-  # GET /roles/1/edit
-  def edit
-    @role = Role.find params[:id]
+    set_models(@role.positions, [], [@role], @role.current_privileges, Role)
   end
 
   # POST /roles

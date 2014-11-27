@@ -1,0 +1,14 @@
+<h1><%= title %></h1>
+<table>
+	<tr>
+		<% things[:columns].each do |key| %>
+			<th><%= key %></th>
+		<% end %>
+	</tr>
+	<% things[:marked].each do |thing| %>
+		<%= render "shared/row", thing: thing, mark: things[:top] ? "topmark" : "mark" %>
+	<% end %>
+	<% things[:rest].each do |thing| %>
+		<%= render "shared/row", thing: thing, mark: "" %>
+	<% end %>
+</table>

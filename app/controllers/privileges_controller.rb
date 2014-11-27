@@ -1,4 +1,4 @@
-class PrivilegesController < ApplicationController
+class PrivilegesController < IndexController
   before_action :set_privilege, only: [:show, :edit, :update, :destroy]
 
   # GET /privileges
@@ -10,15 +10,7 @@ class PrivilegesController < ApplicationController
   # GET /privileges/1
   # GET /privileges/1.json
   def show
-  end
-
-  # GET /privileges/new
-  def new
-    @privilege = Privilege.new
-  end
-
-  # GET /privileges/1/edit
-  def edit
+    set_models([], @privilege.students, @privilege.roles, [@privilege], Privilege)
   end
 
   # POST /privileges
