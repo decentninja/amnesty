@@ -12,10 +12,43 @@
  *= require_tree .
  */
 
- .mark {
- 	background-color: blue;
- }
+html {
+	position: relative;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
 
- .topmark {
- 	background-color: red;
- }
+body {
+	margin: 0 0 19em;
+}
+
+footer {
+	position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 15em;
+    width: 95%;
+    padding: 2.5%;
+    background-color: black;
+}
+
+footer > h1 {
+	font-size: 10vw;
+	color: light-gray;
+	display: inline-block;
+	margin-top: 0.6em;
+}
+
+footer > p {
+	text-align: justify;
+	display: inline-block;
+	width: 80%;
+}
+
+@media all and (min-width: 1421px) {
+	footer > p {
+		margin-left: 5em;
+		width: 40vw;
+	}
+}

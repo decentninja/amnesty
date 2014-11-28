@@ -1,0 +1,26 @@
+.page {
+	text-align: center;
+}
+
+.column {
+	text-align: left;
+	display: inline-block;
+}
+
+@media all and (max-width: 1421px) {
+	.column {
+		display: block;
+	}
+}
+
+.row {
+	font-size: 10px;
+}
+
+.mark {
+	background-color: blue;
+}
+
+.topmark {
+	background-color: red;
+}

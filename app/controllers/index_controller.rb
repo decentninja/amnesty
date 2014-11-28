@@ -25,7 +25,7 @@ private
     {
       marked: relevant,
       rest: model.where.not(id: relevant.map(&:id)),
-      columns: model.column_names,
+      columns: model.column_names - ["id", "ugid", "dfunkt_id"],
       top: top
     }
   end

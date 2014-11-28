@@ -1,5 +1,13 @@
-<tr class="<%= mark %>">
-	<% thing.attributes.each do |key, value| %>
-		<td><%= link_to(value || "", thing) %></td>
+<tr class="row <%= mark %>">
+	<% columns.each do |key| %>
+		<% value = thing[key] %>
+		<% rv = value.to_s.slice(0, 15) %>
+		<td>
+			<% if value.class == ActiveSupport::TimeWithZone %>
+				<%= value.to_datetime.to_date.iso8601 %>
+			<% else %>
+				<%= link_to(rv || "", thing) %>
+			<% end %>
+		</td>
 	<% end %>
 </tr>
