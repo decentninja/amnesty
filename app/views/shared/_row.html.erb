@@ -1,4 +1,14 @@
 <tr class="row <%= mark %>">
+		<td>
+		<% if !main %>
+			<% if mark != "" %>
+				<a class="change remove" href="#">-</a>
+			<% else %>
+				<a class="change add" href="#">+</a>
+			<% end %>
+			<% end %>
+		</td>
+	
 	<% columns.each do |key| %>
 		<% value = thing[key] %>
 		<% rv = value.to_s.slice(0, 15) %>

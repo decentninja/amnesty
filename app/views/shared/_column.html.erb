@@ -3,17 +3,18 @@
 	<table>
 		<thead>
 			<tr>
+				<th>Add</th>
 				<% things[:columns].each do |key| %>
-					<th><%= key.gsub("_", " ").capitalize %></th>
+					<th><%= key.gsub("_", " ").titleize %></th>
 				<% end %>
 			</tr>
 		</thead>
 		<tbody>
 			<% things[:marked].each do |thing| %>
-				<%= render "shared/row", thing: thing, mark: things[:top] ? "topmark" : "mark", columns: things[:columns] %>
+				<%= render "shared/row", thing: thing, mark: things[:top] ? "topmark" : "mark", columns: things[:columns], main: main %>
 			<% end %>
 			<% things[:rest].each do |thing| %>
-				<%= render "shared/row", thing: thing, columns: things[:columns], mark: "" %>
+				<%= render "shared/row", thing: thing, columns: things[:columns], mark: "", main: main %>
 			<% end %>
 		</tbody>
 	</table>
