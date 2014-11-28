@@ -11,4 +11,8 @@ class Position < ActiveRecord::Base
   def self.positions_for(ugid)
     DFUNKT::Positions.fetch(ugid)
   end
+
+  def students
+  	roles.map(&:students).flatten
+  end
 end

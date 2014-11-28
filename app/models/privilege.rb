@@ -25,4 +25,12 @@ class Privilege < ActiveRecord::Base
   def encode_json(_options = nil)
     name.to_json
   end
+
+  def positions
+    Position.where(id: Privilege.first.roles.map(&:positions).flatten.map(&:id))
+  end
+
+  def students_with_from_role
+    students + roles.map(&:students).flatten
+  end
 end

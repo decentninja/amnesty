@@ -10,7 +10,13 @@ class RolesController < IndexController
   # GET /roles/1
   # GET /roles/1.json
   def show
-    set_models(@role.positions, [], [@role], @role.current_privileges, Role)
+    set_models(
+      positions: @role.positions,
+      students: @role.students,
+      roles: [@role],
+      privileges: @role.current_privileges,
+      top: Role
+    )
   end
 
   # POST /roles

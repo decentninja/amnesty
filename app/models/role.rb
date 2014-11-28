@@ -28,6 +28,10 @@ class Role < ActiveRecord::Base
     assignment(student).expires = Date.yesterday
   end
 
+  def students
+    role_assignments.map &:student
+  end
+
   def assignment(student)
     role_assignments.find_by_student_id(student.id)
   end

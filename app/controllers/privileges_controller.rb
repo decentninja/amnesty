@@ -10,7 +10,13 @@ class PrivilegesController < IndexController
   # GET /privileges/1
   # GET /privileges/1.json
   def show
-    set_models([], @privilege.students, @privilege.roles, [@privilege], Privilege)
+    set_models(
+      positions: @privilege.positions,
+      students: @privilege.students_with_from_role,
+      roles: @privilege.roles,
+      privileges: [@privilege],
+      top: Privilege
+    )
   end
 
   # POST /privileges
