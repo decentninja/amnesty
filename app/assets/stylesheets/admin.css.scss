@@ -7,20 +7,61 @@
 	display: inline-block;
 }
 
+.column > h1 {
+	text-align: center;
+	font-size: 3em;
+}
+
 @media all and (max-width: 1421px) {
+	.column > h1 {
+		text-align: left;
+	}
+
 	.column {
 		display: block;
 	}
 }
 
-.row {
-	font-size: 10px;
+.row a {
+	text-decoration: none;
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+
+td {
+	padding-left: 0.2em;
+	padding-right: 0.2em;
+}
+
+.row a:visited {
+	color: #333;
+}
+
+tr.row:hover {
+	background-color: gray;;
+}
+
+.row a:hover {
+	background-color: inherit;
 }
 
 .mark {
-	background-color: blue;
+	background-color: lighten(#E2007F, 20%);
 }
 
 .topmark {
-	background-color: red;
+	background-color: #E2007F;
+}
+
+tbody:first-child tr {
+	background-color: inherit;
+}
+
+thead {
+	text-align: center;
+}
+
+tbody > tr {
+	background-color: rgb(252, 218, 6)
 }
