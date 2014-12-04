@@ -31,9 +31,27 @@
 	width: 100%;
 }
 
+.row td.new:empty {
+	background-color: rgb(253, 253, 253);
+}
+
+.row input.new {
+	background-color: rgb(252, 218, 6);
+	width: 100%;
+	border: none;
+	font-size: 13px;
+	line-height: 18px;
+	color: #333;
+
+	&[type="submit"] {
+		font-size: 90%;
+		cursor: pointer;
+	}
+}
+
 td {
-	padding-left: 0.2em;
-	padding-right: 0.2em;
+	padding-left: 0.4em;
+	padding-right: 0.4em;
 }
 
 .row a:visited {
@@ -52,6 +70,9 @@ td {
 
 a.change {
 	text-align: center;
+	&.new {
+		font-size: 80%;
+	}
 }
 
 .topmark {

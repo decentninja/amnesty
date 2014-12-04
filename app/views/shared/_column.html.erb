@@ -16,6 +16,19 @@
 			<% things[:rest].each do |thing| %>
 				<%= render "shared/row", thing: thing, columns: things[:columns], mark: "", main: main %>
 			<% end %>
+			<tr class="row">
+				<%= form_tag("/" + url, method: "post") do %>
+					<td>
+						<input class="new" type="submit" value="✓">
+					</td>
+					<% things[:columns].each do |column| %>
+						<!-- needs to be without whitespace for css :empty-->
+						<td class="new"><% if column != "updated_at" %>
+							<input name="<%= column %>" class="new" size="15">
+						<% end %></td>
+					<% end %>
+				<% end %>
+			</tr>
 		</tbody>
 	</table>
 </div>

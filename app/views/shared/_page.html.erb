@@ -1,6 +1,6 @@
 <div class="page">
-	<%= render 'shared/column', title: "Positions", things: @positions, main: main == "position" %>
-	<%= render 'shared/column', title: "Students", things: @students, main: main == "student" %>
-	<%= render 'shared/column', title: "Roles", things: @roles, main: main == "role" %>
-	<%= render 'shared/column', title: "Privileges", things: @privileges, main: main == "privilege" %>
+	<%= render 'shared/column', title: "Positions", things: @positions, main: main == "position", url: "positions" %>
+	<%= render 'shared/column', title: "Students", things: @students, main: main == "student", url: "students" %>
+	<%= render 'shared/column', title: "Roles", things: @roles, main: main == "role", url: "roles" %>
+	<%= render 'shared/column', title: "Privileges", things: @privileges, main: main == "privilege", url: "privileges" %>
 </div>
