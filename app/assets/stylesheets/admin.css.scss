@@ -68,11 +68,13 @@ td {
 	background-color: lighten(#E2007F, 20%);
 }
 
-a.change {
+td.change > input {
 	text-align: center;
-	&.new {
-		font-size: 80%;
-	}
+	border: none;
+	background: inherit;
+	font-size: inherit;
+	width: 100%;
+	cursor: pointer;
 }
 
 .topmark {

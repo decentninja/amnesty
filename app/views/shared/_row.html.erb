@@ -1,23 +1,27 @@
 <tr class="row <%= mark %>">
-		<td>
-		<% if !main %>
-			<% if mark != "" %>
-				<a class="change remove" href="#">-</a>
-			<% else %>
-				<a class="change add" href="#">+</a>
-			<% end %>
-			<% end %>
-		</td>
-	
-	<% columns.each do |key| %>
-		<% value = thing[key] %>
-		<% rv = value.to_s.slice(0, 15) %>
-		<td>
-			<% if value.class == ActiveSupport::TimeWithZone %>
-				<%= value.to_datetime.to_date.iso8601 %>
-			<% else %>
-				<%= link_to(rv || "", thing) %>
+	<%= form_tag do %>
+		<td class="change">
+			<% if !main %>
+				<% if mark != "" %>
+					<%= submit_tag("-") %>
+				<% else %>
+					<%= submit_tag("+") %>
+				<% end %>
 			<% end %>
 		</td>
-	<% end %>
-</tr>
+
+		<%= hidden_field_tag(:id, thing[:id]) %>
+		
+		<% columns.each do |key| %>
+			<% value = thing[key] %>
+			<% rv = value.to_s.slice(0, 15) %>
+			<td>
+				<% if value.class == ActiveSupport::TimeWithZone %>
+					<%= value.to_datetime.to_date.iso8601 %>
+				<% else %>
+					<%= link_to(rv || "", thing) %>
+				<% end %>
+			</td>
+		<% end %>
+	</tr>
+<% end %>
