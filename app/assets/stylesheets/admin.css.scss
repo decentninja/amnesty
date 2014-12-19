@@ -5,7 +5,7 @@
 .column {
 	text-align: left;
 	display: inline-block;
-	margin: 1em;
+	margin: 0.4em;
 }
 
 .column > h1 {
@@ -13,7 +13,7 @@
 	font-size: 3em;
 }
 
-@media all and (max-width: 1323px) {
+@media all and (max-width: 1435px) {
 	.column > h1 {
 		text-align: left;
 	}
@@ -29,10 +29,6 @@
 	color: #333;
 	height: 100%;
 	width: 100%;
-}
-
-.row td.new:empty {
-	background-color: rgb(253, 253, 253);
 }
 
 .row input.new {
@@ -75,6 +71,10 @@ td.change > input {
 	font-size: inherit;
 	width: 100%;
 	cursor: pointer;
+}
+
+.change .remove {
+	font-size: 90%;
 }
 
 .topmark {

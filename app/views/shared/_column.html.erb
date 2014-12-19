@@ -3,7 +3,8 @@
 	<table>
 		<thead>
 			<tr>
-				<th>Add</th>
+				<th></th>
+				<th></th>
 				<% things[:columns].each do |key| %>
 					<th><%= key.gsub("_", " ").titleize %></th>
 				<% end %>
@@ -16,11 +17,12 @@
 			<% things[:rest].each do |thing| %>
 				<%= render "shared/row", thing: thing, columns: things[:columns], mark: "", main: main %>
 			<% end %>
-			<tr class="row">
+			<tr class="row new">
 				<%= form_tag("/" + url, method: "post") do %>
-					<td>
-						<input class="new" type="submit" value="✓">
+					<td class="change">
+						<%= submit_tag("✓", title: "Create") %>
 					</td>
+					<td></td>
 					<% things[:columns].each do |column| %>
 						<!-- needs to be without whitespace for css :empty-->
 						<td class="new"><% if column != "updated_at" %>

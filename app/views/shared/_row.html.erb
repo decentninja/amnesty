@@ -3,11 +3,14 @@
 		<td class="change">
 			<% if !main %>
 				<% if mark != "" %>
-					<%= submit_tag("-") %>
+					<%= submit_tag("-", title: "Unassign") %>
 				<% else %>
-					<%= submit_tag("+") %>
+					<%= submit_tag("+", title: "Assign") %>
 				<% end %>
 			<% end %>
+		</td>
+		<td class="change">
+			<%= submit_tag("×", class: "remove", title: "Remove") %>
 		</td>
 
 		<%= hidden_field_tag(:id, thing[:id]) %>
