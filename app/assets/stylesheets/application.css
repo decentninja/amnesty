@@ -11,3 +11,67 @@
  *= require_self
  *= require_tree .
  */
+
+
+* {
+    font-family: 'Arvo', serif !important /* Fucking scafold */;
+}
+
+body {
+    margin: 0;
+    width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media all and (max-width: 1080px) {
+    body {
+        width: 100%;
+    }
+
+    header > nav {
+        width: 70em;
+    }
+}
+
+header > h1 {
+    display: inline-block;
+    background-color: rgb(18, 18, 18);
+    padding: 1em;
+    margin: 1em;
+    color: white;
+    font-size: 2em;
+    vertical-align: top;
+}
+
+header > nav {
+    display: inline-block;
+    font-size: 40%;
+}
+
+header > nav > a {
+    width: 20em;
+    vertical-align: top;
+    margin-left: 1em;
+    padding-right: 1em;
+    padding-left: 1em;
+    display: inline-block;
+}
+
+header a {
+    font-size: 1.5em;
+    text-decoration: none;
+}
+
+header a.current {
+    border-top: 0.5em solid #E2007F;
+    margin-top: -0.4em;
+}
+
+header a h2 {
+    font-size: 2em;
+}
+
+.page {
+    margin: 2em;
+}

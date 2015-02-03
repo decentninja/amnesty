@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Amnesty</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <title>Amnesty - Datasektionen rights and permissions management</title>
+  <link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div>
-  	<%= link_to 'Students', students_url %>
-  	<%= link_to 'Roles', roles_url %>
-  	<%= link_to 'Privileges', privileges_url %>
-  </div>
+<header>
+  <h1>Amnesty</h1>
+  <nav>
+    <%= link_to(students_url, {class: if current_page?(students_url) then 'current' else '' end}) do %>
+        <h2>Students</h2>
 
-<%= yield %>
+        <p>What roles, positions and cherry-picked privileges individual students has.</p>
+    <% end %>
+    <%= link_to(roles_url, {class: if current_page?(roles_url) then 'current' else '' end}) do %>
+        <h2>Roles</h2>
+
+        <p>Which position and or students have a certain role and what privileges are associated with that role.</p>
+    <% end %>
+    <%= link_to(privileges_url, {class: if current_page?(privileges_url) then 'current' else '' end}) do %>
+        <h2>Privileges</h2>
+
+        <p>Which roles and cherry-picked students have certain privilege.</p>
+    <% end %>
+    <%= link_to(positions_url, {class: if current_page?(positions_url) then 'current' else '' end}) do %>
+        <h2>Positions</h2>
+
+        <p>Pulled from DFUNKT, what roles are automatically given to students with a particular position.</p>
+    <% end %>
+  </nav>
+</header>
+
+    <div class="page"><%= yield %></div>
 
 </body>
 </html>
