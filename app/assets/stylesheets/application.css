@@ -103,6 +103,10 @@ header a h2 {
     background-color: rgb(252, 218, 6)
 }
 
+.page table {
+    width: 100%;
+}
+
 .page table input {
     background-color: inherit;
     border: none;
