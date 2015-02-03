@@ -1,11 +1,28 @@
-<h1>Listing students</h1>
+
+<div class="actions">
+</div>
+
+<% if @student.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
+
+      <ul>
+        <% @student.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
 
 <table>
   <thead>
     <tr>
       <th>First name</th>
       <th>Last name</th>
-      <th>Ugid</th>
+      <th>Positions</th>
+      <th>Roles</th>
+      <th>Cherry-picked</th>
+      <th>From roles*</th>
       <th></th>
       <th></th>
       <th></th>
@@ -17,15 +34,28 @@
       <tr>
         <td><%= student.first_name %></td>
         <td><%= student.last_name %></td>
-        <td><%= student.ugid %></td>
+        <td><%= student.positions.map(&:name).join(', ') %></td>
+        <td><%= student.roles.map(&:name).join(', ') %></td>
+        <td><%= student.privileges.current.map(&:name).join(', ') %></td>
+        <td><%= student.roles.current.flat_map(&:current_privileges).map(&:names).join(', ') %></td>
         <td><%= link_to 'Show', student %></td>
         <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy*', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+    <tr>
+        <%= form_for(@student) do |f| %>
+            <td><%= f.text_field :first_name %></td>
+            <td><%= f.text_field :last_name %></td>
+          <td class="nope"></td>
+          <td class="nope"></td>
+          <td class="nope"></td>
+          <td class="nope"></td>
+          <td><%= f.submit 'Create' %></td>
+        <% end %>
+    </tr>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Student', new_student_path %>
+<p>* Set join of role privileges.</p>
+<p>** Will remove user from this system, revoking all privileges and roles associated with this user. This will not remove the user from the position, you will need to do that in DFUNKT.</p>
