@@ -1,7 +1,11 @@
 Amnesty::Application.routes.draw do
   resources :roles
 
-  resources :students
+  resources :students do
+    member do
+      post 'add_role', :as => :add_role
+    end
+  end
 
   resources :privileges do
   end

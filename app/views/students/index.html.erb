@@ -59,8 +59,8 @@
     <% end %>
     <tr>
         <%= form_for(@student) do |f| %>
-          <td><%= f.text_field :first_name %></td>
-          <td><%= f.text_field :last_name %></td>
+          <td><%= f.text_field :first_name, {placeholder: 'First name'} %></td>
+          <td><%= f.text_field :last_name, {placeholder: 'Last name'} %></td>
           <td class="nope"></td>
           <td class="nope"></td>
           <td class="nope"></td>

@@ -19,19 +19,6 @@
 
 body {
     margin: 0;
-    width: 950px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-@media all and (max-width: 950px) {
-    body {
-        width: 100%;
-    }
-
-    header > nav {
-        width: 70em;
-    }
 }
 
 header > h1 {
@@ -111,6 +98,8 @@ header a h2 {
     background-color: inherit;
     border: none;
     font-size: inherit;
+    width: 100%;
+    text-align: left;
     color: inherit;
     margin: 0;
     padding: 0;

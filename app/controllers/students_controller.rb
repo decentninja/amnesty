@@ -11,6 +11,12 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
+    @allRoles = Role.all
+  end
+
+  def add_role
+    print("Halla!", params)
+    render 'show'
   end
 
 

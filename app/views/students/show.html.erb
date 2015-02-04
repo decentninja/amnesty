@@ -1,72 +1,93 @@
 <div class="actions">
-  <%= link_to 'Back', students_path %>
+  <%= link_to 'Back', students_path %> |
+  <%= link_to 'Destroy', @student, method: :delete, data: {confirm: "Are you sure you want to destory the records for #{@student.first_name} #{@student.last_name}?"} %>
 </div>
 
 <p id="notice"><%= notice %></p>
 
-<div>
-  <h3>Info</h3>
+<div class="students">
+  <div>
+    <h2>Info</h2>
+    <table>
+      <%= form_for(@student) do |f| %>
+          <tr>
+            <td>First name:</td>
+            <td><%= f.text_field :first_name %></td>
+          </tr>
+          <tr>
+            <td>Last name:</td>
+            <td><%= f.text_field :last_name %></td>
+          </tr>
+          <tr>
+            <td>UGID:</td>
+            <td><%= f.text_field :ugid %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%= f.submit 'Update' %></td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
 
-  <p>
-    <strong>First name:</strong>
-    <%= @student.first_name %>
-  </p>
+  <div>
+    <h2>Roles</h2>
+    <%= form_tag add_role_student_path do %>
+        <table>
+          <tr>
+            <td>Name</td>
+            <td></td>
+          </tr>
+          <% @student.roles.each do |role| %>
+              <tr>
+                <td><%= link_to(role.name, role) %></td>
+                <td><a href="#">Remove<a></td>
+              </tr>
+          <% end %>
+          <tr>
+            <td>
+              <input type="text" name="role_name" list="roles" placeholder="Enter name">
+              <datalist id="roles">
+                <%= Role.all.each do |role| %>
+                    <option value="<%= role.name %>"></option>
+                <% end %>
+              </datalist>
+            </td>
+            <td><%= submit_tag 'add' %></td>
+          </tr>
+        </table>
+    <% end %>
+  </div>
 
-  <p>
-    <strong>Last name:</strong>
-    <%= @student.last_name %>
-  </p>
+  <div>
+    <h2>Positions</h2>
+    <table>
+      <tr>
+        <td>Name</td>
+        <td></td>
+      </tr>
+      <% @student.positions.each do |position| %>
+          <tr>
+            <td><%= link_to(position.name, position) %></td>
+            <td><a href="#">Delete</a></td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
 
-  <p>
-    <strong>Ugid:</strong>
-    <%= @student.ugid %>
-  </p>
-</div>
-
-<div>
-  <h3>Roles</h3>
-
-  <p>
-    <strong>Roles:</strong>
-  </p>
-  <% @student.roles.each do |role| %>
-      <p>
-        <%= role.name %>
-      </p>
-  <% end -%>
-  <p>
-</div>
-
-<div>
-  <h3>Positions</h3>
-  <p>
-    <strong>
-      Positions:
-    </strong>
-  </p>
-
-  <p>
-    <% @student.positions.each do |position| %>
-      <p>
-        <%= position.name %>
-      </p>
-  <% end -%>
-  </p>
-</div>
-
-<div>
-  <h3>Privileges</h3>
-  <p>
-    <strong>
-      Privileges:
-    </strong>
-  </p>
-
-  <p>
-    <% @student.privileges.each do |privilege| %>
-      <p>
-        <%= privilege.name %>
-      </p>
-  <% end -%>
-  </p>
+  <div>
+    <h2>Privileges</h2>
+    <table>
+      <tr>
+        <td>Name</td>
+        <td></td>
+      </tr>
+      <% @student.privileges.each do |privilege| %>
+          <tr>
+            <td><%= link_to(privilege.name, privilege) %></td>
+            <td><a href="#">Delete</a></td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
