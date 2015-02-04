@@ -4,17 +4,13 @@ class RolesController < ApplicationController
   # GET /roles
   # GET /roles.json
   def index
+    @role = Role.new
     @roles = Role.all
   end
 
   # GET /roles/1
   # GET /roles/1.json
   def show
-  end
-
-  # GET /roles/new
-  def new
-    @role = Role.new
   end
 
   # GET /roles/1/edit

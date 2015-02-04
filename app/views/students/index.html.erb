@@ -1,11 +1,6 @@
-
-<div class="actions">
-</div>
-
 <% if @student.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
-
       <ul>
         <% @student.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
@@ -14,62 +9,63 @@
     </div>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Positions</th>
-      <th>Roles</th>
-      <th>Cherry-picked</th>
-      <th>From roles*</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @students.each do |student| %>
+<%= form_for(@student) do |f| %>
+    <table>
+      <thead>
       <tr>
-        <td><%= student.first_name %></td>
-        <td><%= student.last_name %></td>
-        <td>
-          <% student.positions.each do |position| %>
-            <%= link_to position.name, position %>
-          <% end %>
-        </td>
-        <td>
-          <% student.roles.each do |role| %>
-            <%= link_to role.name, role %>
-          <% end %>
-        </td>
-        <td>
-          <% student.privileges.current.each do |priv| %>
-            <%= link_to priv.name, priv %>
-          <% end %>
-        </td>
-        <td>
-          <% student.roles.current.flatten.each do |priv| %>
-            <%= link_to priv.name, priv %>
-          <% end %>
-        </td>
-        <td><%= link_to 'Details', student %></td>
-        <td><%= link_to 'Destroy*', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Positions</th>
+        <th>Roles</th>
+        <th>Cherry-picked</th>
+        <th>From roles*</th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-    <tr>
-        <%= form_for(@student) do |f| %>
-          <td><%= f.text_field :first_name, {placeholder: 'First name'} %></td>
-          <td><%= f.text_field :last_name, {placeholder: 'Last name'} %></td>
-          <td class="nope"></td>
-          <td class="nope"></td>
-          <td class="nope"></td>
-          <td class="nope"></td>
-          <td><%= f.submit 'Create' %></td>
-        <% end %>
-    </tr>
-  </tbody>
-</table>
+      </thead>
+
+      <tbody>
+      <% @students.each do |student| %>
+          <tr>
+            <td><%= student.first_name %></td>
+            <td><%= student.last_name %></td>
+            <td>
+              <% student.positions.each do |position| %>
+                  <%= link_to position.name, position %>
+              <% end %>
+            </td>
+            <td>
+              <% student.roles.each do |role| %>
+                  <%= link_to role.name, role %>
+              <% end %>
+            </td>
+            <td>
+              <% student.privileges.current.each do |priv| %>
+                  <%= link_to priv.name, priv %>
+              <% end %>
+            </td>
+            <td>
+              <% student.roles.current.flatten.each do |priv| %>
+                  <%= link_to priv.name, priv %>
+              <% end %>
+            </td>
+            <td><%= link_to 'Details', student %></td>
+            <td><%= link_to 'Destroy*', student, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+          </tr>
+      <% end %>
+      <tr>
+        <td><%= f.text_field :first_name, {placeholder: 'First name'} %></td>
+        <td><%= f.text_field :last_name, {placeholder: 'Last name'} %></td>
+        <td class="nope"></td>
+        <td class="nope"></td>
+        <td class="nope"></td>
+        <td class="nope"></td>
+        <td><%= f.submit 'Create' %></td>
+      </tr>
+      </tbody>
+    </table>
+<% end %>
 
 <p>* Set join of role privileges.</p>
-<p>** Will remove user from this system, revoking all privileges and roles associated with this user. This will not remove the user from the position, you will need to do that in DFUNKT.</p>
+<p>** Will remove user from this system, revoking all privileges and roles associated with this user. This will not
+  remove the user from the position, you will need to do that in DFUNKT.</p>

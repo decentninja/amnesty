@@ -48,11 +48,21 @@ header > nav > a {
 header a {
     font-size: 1.5em;
     text-decoration: none;
+    color: #666;
+}
+
+header a:hover {
+    color: white;
 }
 
 header a.current {
     border-top: 0.5em solid #E2007F;
     margin-top: -0.4em;
+    color: black;
+}
+
+header a.current:hover {
+    color: white;
 }
 
 header a h2 {
@@ -118,4 +128,8 @@ header a h2 {
 
 .page table .nope {
     background-color: white;
+}
+
+.error {
+    color: red;
 }

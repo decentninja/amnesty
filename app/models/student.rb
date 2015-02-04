@@ -1,6 +1,7 @@
 # Student, person, cal them what you like.
 class Student < ActiveRecord::Base
   has_many :privilege_assignments, as: :privileged, dependent: :destroy
+  validates :privilege_assignments, uniqueness: true
   has_many :privileges, through: :privilege_assignments do
     def current
       where('privilege_assignments.expires IS NULL OR privilege_assignments.expires >= ?', Date.today)

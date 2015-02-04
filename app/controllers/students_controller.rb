@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: [:show, :update, :destroy]
+  before_action :set_student, only: [:show, :update, :destroy, :add_role, :remove_role, :add_privilege, :remove_privilege]
 
   # GET /students
   # GET /students.json
@@ -11,28 +11,57 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
-    @allRoles = Role.all
   end
 
   def add_role
-    print("Halla!", params)
+    role = Role.where("name like ?", params[:role_name])[0]
+    if role == nil
+      @student.errors.add(:role_name, 'does not exist. Go to the roles tab and create it!')
+    else
+      if @student.roles.include?(role)
+        @student.errors.add(:role_name, 'is already added.')
+      else
+        @student.roles << role
+      end
+    end
     render 'show'
   end
 
+  def remove_role
+    role = Role.find(params[:role_id])
+    @student.roles.delete(role)
+    render 'show'
+  end
+
+  def add_privilege
+    priv = Privilege.where("name like ?", params[:priv_name])[0]
+    if priv == nil
+      @student.errors.add(:priv_name, 'does not exist. Go to the privileges tab and create it!')
+    else
+      if @student.privileges.include?(priv)
+        @student.errors.add(:priv_name, 'is already added.')
+      else
+        @student.privileges << priv
+      end
+    end
+    render 'show'
+  end
+
+  def remove_privilege
+    priv = Privilege.find(params[:role_id])
+    @student.privileges.delete(priv)
+    render 'show'
+  end
 
   # POST /students
   # POST /students.json
   def create
     @student = Student.new(student_params)
+    @student.save
 
     respond_to do |format|
-      if @student.save
-        format.html { redirect_to @student, notice: 'Student was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @student }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
-      end
+      format.html { render 'show' }x  
+      format.json { render json: @student.errors, status: :unprocessable_entity }
     end
   end
 

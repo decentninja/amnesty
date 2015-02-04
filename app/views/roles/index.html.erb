@@ -1,27 +1,40 @@
-<h1>Listing roles</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @roles.each do |role| %>
+<%= form_for(@role) do |f| %>
+    <table>
+      <thead>
       <tr>
-        <td><%= role.name %></td>
-        <td><%= link_to 'Show', role %></td>
-        <td><%= link_to 'Edit', edit_role_path(role) %></td>
-        <td><%= link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Privileges</th>
+        <th>Positions</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
+      <tbody>
+      <% @roles.each do |role| %>
+          <tr>
+            <td><%= role.name %></td>
+            <td>
+              <% role.privileges.each do |priv| %>
+                  <%= link_to priv.name, priv %>
+              <% end %>
+            </td>
+            <td>
+              <% role.positions.each do |position| %>
+                  <%= link_to position.name, position %>
+              <% end %>
+            </td>
+            <td><%= link_to 'Details', role %></td>
+            <td><%= link_to 'Destroy*', role, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+          </tr>
+      <% end %>
+      <tr>
+        <td><%= f.text_field :name, {placeholder: 'Name'} %></td>
+        <td class="nope"></td>
+        <td class="nope"></td>
+        <td><%= f.submit 'Create' %></td>
+      </tr>
+      </tbody>
+    </table>
+<% end %>
 
-<br>
-
-<%= link_to 'New Role', new_role_path %>
+<p>* Revoke all privileges associated with that role for students that have this role and are <b>not</b> cherry-picked.
+</p>
