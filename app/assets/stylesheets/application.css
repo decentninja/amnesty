@@ -133,3 +133,8 @@ header a h2 {
 .error {
     color: red;
 }
+
+.layoutlayout div {
+    display: inline-block;
+    margin: 2em;
+}
