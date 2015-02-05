@@ -138,3 +138,9 @@ header a h2 {
     display: inline-block;
     margin: 2em;
 }
+
+footer {
+    width: 100%;
+    text-align: center;
+    color: #666;
+}
