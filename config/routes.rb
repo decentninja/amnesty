@@ -20,9 +20,20 @@ Amnesty::Application.routes.draw do
   end
 
   resources :privileges do
+    member do
+      post 'add_role'
+      get 'remove_role'
+      post 'add_student'
+      get 'remove_student'
+    end
   end
 
-  resources :positions
+  resources :positions do
+    member do
+      post 'add_role'
+      get 'remove_role'
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

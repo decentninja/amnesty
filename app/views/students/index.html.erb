@@ -17,8 +17,8 @@
         <th>Last name</th>
         <th>Positions</th>
         <th>Roles</th>
-        <th>Cherry-picked</th>
-        <th>From roles*</th>
+        <th>Cherry-picked**</th>
+        <th>From roles***</th>
         <th></th>
         <th></th>
       </tr>
@@ -45,7 +45,7 @@
               <% end %>
             </td>
             <td>
-              <% student.roles.current.flatten.each do |priv| %>
+              <% student.roles.map(&:privileges).flatten.each do |priv| %>
                   <%= link_to priv.name, priv %>,
               <% end %>
             </td>
@@ -66,6 +66,7 @@
     </table>
 <% end %>
 
-<p>* Set join of role privileges.</p>
-<p>** Will remove user from this system, revoking all privileges and roles associated with this user. This will not
+<p>* Will remove user from this system, revoking all privileges and roles associated with this user. This will not
   remove the user from the position, you will need to do that in DFUNKT.</p>
+<p>** Privileges picked specially for this student, not given to the student by having any role.</p>
+<p>*** Set join of role privileges.</p>

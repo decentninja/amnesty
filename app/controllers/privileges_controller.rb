@@ -5,6 +5,7 @@ class PrivilegesController < ApplicationController
   # GET /privileges.json
   def index
     @privileges = Privilege.all
+    @privilege = Privilege.new
   end
 
   # GET /privileges/1
@@ -12,28 +13,30 @@ class PrivilegesController < ApplicationController
   def show
   end
 
-  # GET /privileges/new
-  def new
-    @privilege = Privilege.new
+  def add_role
+
   end
 
-  # GET /privileges/1/edit
-  def edit
+  def remove_role
+
+  end
+
+  def add_student
+
+  end
+
+  def remove_student
+
   end
 
   # POST /privileges
   # POST /privileges.json
   def create
     @privilege = Privilege.new(privilege_params)
-
+    @privilege.save
     respond_to do |format|
-      if @privilege.save
-        format.html { redirect_to @privilege, notice: 'Privilege was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @privilege }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @privilege.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to @privilege, notice: 'Privilege was successfully created.' }
+      format.json { render action: 'show', status: :created, location: @privilege }
     end
   end
 
@@ -62,13 +65,13 @@ class PrivilegesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_privilege
-      @privilege = Privilege.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_privilege
+    @privilege = Privilege.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def privilege_params
-      params.require(:privilege).permit(:name)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def privilege_params
+    params.require(:privilege).permit(:name)
+  end
 end

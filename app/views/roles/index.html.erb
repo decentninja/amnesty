@@ -22,12 +22,12 @@
             </td>
             <td>
               <% role.privileges.each do |priv| %>
-                  <%= link_to priv.name, priv %>
+                  <%= link_to priv.name, priv %>,
               <% end %>
             </td>
             <td>
               <% role.positions.each do |position| %>
-                  <%= link_to position.name, position %>
+                  <%= link_to position.name, position %>,
               <% end %>
             </td>
             <td><%= link_to 'Details', role %></td>

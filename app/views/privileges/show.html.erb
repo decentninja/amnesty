@@ -1,9 +1,107 @@
-<p id="notice"><%= notice %></p>
+<div class="actions">
+  <%= link_to 'Back', students_path %> |
+  <%= link_to 'Destroy', @privilege, method: :delete, data: {confirm: "Are you sure you want to destory the records for #{@privilege.name}?"} %>
+  <% if @privilege.errors.any? %>
+      <% @privilege.errors.full_messages.each do |msg| %>
+          <span class="error"><%= msg %></span>
+      <% end %>
+  <% end %>
+  <span id="notice"><%= notice %></span>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @privilege.name %>
-</p>
 
-<%= link_to 'Edit', edit_privilege_path(@privilege) %> |
-<%= link_to 'Back', privileges_path %>
+<div class="layoutlayout">
+  <div>
+    <h2>Info</h2>
+    <table>
+      <%= form_for(@privilege) do |f| %>
+          <tr>
+            <th>Name</th>
+            <td><%= f.text_field :name, placeholder: 'Enter name' %></td>
+          </tr>
+          <tr>
+            <th>Created at</th>
+            <td><%= @privilege.created_at %></td>
+          </tr>
+          <tr>
+            <th>Updated at</th>
+            <td><%= @privilege.updated_at %></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><%= f.submit 'Update' %></td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div>
+    <h2>Roles</h2>
+    <%= form_tag add_privilege_role_path do %>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Expires*</th>
+            <th></th>
+          </tr>
+          <% @privilege.roles.each do |role| %>
+              <% assignment = role.privilege_assignments.where("privilege_id = ?", @privilege.id)[0] %>
+              <tr>
+                <td><%= link_to(role.name, role) %></td>
+                <td><%= assignment.expires %></td>
+                <td><%= link_to 'Remove', action: :remove_role, role_id: role.id %></td>
+              </tr>
+          <% end %>
+          <tr>
+            <td>
+              <input type="text" name="role_name" list="roles" placeholder="Enter name">
+              <datalist id="roles">
+                <%= (Role.all - @privilege.roles).each do |role| %>
+                    <option value="<%= role.name %>"></option>
+                <% end %>
+              </datalist>
+            </td>
+            <td><%= date_field '', 'expire', include_blank: true %></td>
+            <td><%= submit_tag 'Add' %></td>
+          </tr>
+        </table>
+    <% end %>
+  </div>
+
+  <div>
+    <h2>Cherry-picked Students</h2>
+    <%= form_tag add_privilege_role_path do %>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Expires**</th>
+            <th></th>
+          </tr>
+          <% @privilege.students.each do |student| %>
+              <% assignment = student.privilege_assignments.where("privilege_id = ?", @privilege.id)[0] %>
+              <tr>
+                <td><%= link_to(student.first_name + ' ' + student.last_name, student) %></td>
+                <td><%= assignment.expires %></td>
+                <td><%= link_to 'Remove', action: :remove_student, student_id: student.id %></td>
+              </tr>
+          <% end %>
+          <tr>
+            <td>
+              <input type="text" name="student_name" list="students" placeholder="Enter name">
+              <datalist id="students">
+                <%= (Student.all - @privilege.students).each do |student| %>
+                    <option value="<%= student.first_name + ' ' + student.last_name %>"></option>
+                <% end %>
+              </datalist>
+            </td>
+            <td><%= date_field '', 'expire', include_blank: true %></td>
+            <td><%= submit_tag 'Add' %></td>
+          </tr>
+        </table>
+    <% end %>
+  </div>
+
+</div>
+
+<p>* Indefinite left blank and no default term end is set.</p>
+<p>** Indefinite if left blank.</p>

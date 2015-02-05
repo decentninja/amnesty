@@ -24,6 +24,14 @@
             <td><%= f.text_field :last_name, placeholder: 'Enter last name' %></td>
           </tr>
           <tr>
+            <th>Created at</th>
+            <td><%= @student.created_at %></td>
+          </tr>
+          <tr>
+            <th>Updated at</th>
+            <td><%= @student.updated_at %></td>
+          </tr>
+          <tr>
             <th>UGID</th>
             <td><%= f.text_field :ugid, placeholder: 'Enter UGID' %></td>
           </tr>
@@ -68,7 +76,7 @@
   </div>
 
   <div>
-    <h2>Privileges</h2>
+    <h2>Cherry-picked Privileges</h2>
     <%= form_tag add_privilege_student_path do %>
         <table>
           <tr>
@@ -120,4 +128,4 @@
 </div>
 
 <p>* Unless a default term end is set on the role.</p>
-<p>** Can be left blank to set indefinite</p>
+<p>** Can be left blank to set indefinite.</p>
