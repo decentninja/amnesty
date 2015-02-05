@@ -1,9 +1,127 @@
-<p id="notice"><%= notice %></p>
+<div class="actions">
+  <%= link_to 'Back', roles_path %> |
+  <%= link_to 'Destroy', @role, method: :delete, data: {confirm: "Are you sure you want to destory the records for #{@role.name}?"} %>
+  <% if @role.errors.any? %>
+      <% @role.errors.full_messages.each do |msg| %>
+          <span class="error"><%= msg %></span>
+      <% end %>
+  <% end %>
+  <span id="notice"><%= notice %></span>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @role.name %>
-</p>
-
-<%= link_to 'Edit', edit_role_path(@role) %> |
-<%= link_to 'Back', roles_path %>
+<div class="layoutlayout">
+  <div>
+    <h2>Info</h2>
+    <table>
+      <%= form_for(@role) do |f| %>
+          <tr>
+            <th>Name</th>
+            <td><%= f.text_field :name, placeholder: 'Enter name' %></td>
+          </tr>
+          <tr>
+            <th>Created at</th>
+            <td><%= @role.created_at %></td>
+          </tr>
+          <tr>
+            <th>Updated at</th>
+            <td><%= @role.updated_at %></th>
+          </tr>
+          <tr>
+            <th>Default term end</th>
+            <td><%= f.datetime_select :default_term_end, placeholder: 'Default term end' %></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><%= f.submit 'Update' %></td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+  <div>
+    <h2>Students</h2>
+    <%= form_tag add_student_role_path do %>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Expires</th>
+            <th></th>
+          </tr>
+          <% @role.role_assignments.each do |assignment| %>
+              <tr>
+                <td><%= link_to assignment.student.first_name + ' ' + assignment.student.last_name, assignment.student %></td>
+                <td><%= assignment.expires %></td>
+                <td><%= link_to 'Remove', action: :remove_student, student_id: assignment.student_id %></td>
+              </tr>
+          <% end %>
+          <tr>
+            <td>
+              <input type="text" name="student_name" list="student" placeholder="Enter name">
+              <datalist id="student">
+                <%= (Student.all - @role.role_assignments.map(&:student)).each do |student| %>
+                    <option value="<%= student.first_name + ' ' + student.last_name %>"></option>
+                <% end %>
+              </datalist>
+            </td>
+            <td><%= datetime_select :expires, placeholder: 'Expires' %></td>
+            <td><%= submit_tag 'Add' %></td>
+          </tr>
+        </table>
+    <% end %>
+  </div>
+  <div>
+    <h2>Privileges</h2>
+    <%= form_tag add_privilege_role_path do %>
+        <table>
+          <tr>
+            <td>Name</td>
+            <td></td>
+          </tr>
+          <% @role.privileges.each do |privilege| %>
+              <tr>
+                <td><%= link_to(privilege.name, privilege) %></td>
+                <td><%= link_to 'Remove', action: :remove_privilege, privilege_id: privilege.id %></td>
+              </tr>
+          <% end %>
+          <tr>
+            <td>
+              <input type="text" name="priv_name" list="privs" placeholder="Enter name">
+              <datalist id="privs">
+                <%= (Privilege.all - @role.privileges).each do |priv| %>
+                    <option value="<%= priv.name %>"></option>
+                <% end %>
+              </datalist>
+            </td>
+            <td><%= submit_tag 'Add' %></td>
+          </tr>
+        </table>
+    <% end %>
+  </div>
+  <div>
+    <h2>Positions</h2>
+    <%= form_tag add_position_role_path do %>
+        <table>
+          <tr>
+            <td>Name</td>
+            <td></td>
+          </tr>
+          <% @role.positions.each do |position| %>
+              <tr>
+                <td><%= link_to(position.name, position) %></td>
+                <td><%= link_to 'Remove', action: :remove_position, position_id: position.id %></td>
+              </tr>
+          <% end %>
+          <tr>
+            <td>
+              <input type="text" name="position_name" list="positions" placeholder="Enter name">
+              <datalist id="positions">
+                <%= (Position.all - @role.positions).each do |pos| %>
+                    <option value="<%= pos.name %>"></option>
+                <% end %>
+              </datalist>
+            </td>
+            <td><%= submit_tag 'Add' %></td>
+          </tr>
+        </table>
+    <% end %>
+  </div>
+</div>

@@ -10,25 +10,25 @@
 </div>
 
 
-<div class="students">
+<div class="layoutlayout">
   <div>
     <h2>Info</h2>
     <table>
       <%= form_for(@student) do |f| %>
           <tr>
-            <td>First name</td>
+            <th>First name</th>
             <td><%= f.text_field :first_name, placeholder: 'Enter first name' %></td>
           </tr>
           <tr>
-            <td>Last name</td>
+            <th>Last name</th>
             <td><%= f.text_field :last_name, placeholder: 'Enter last name' %></td>
           </tr>
           <tr>
-            <td>UGID</td>
+            <th>UGID</th>
             <td><%= f.text_field :ugid, placeholder: 'Enter UGID' %></td>
           </tr>
           <tr>
-            <td></td>
+            <th></th>
             <td><%= f.submit 'Update' %></td>
           </tr>
       <% end %>
@@ -58,7 +58,7 @@
                 <% end %>
               </datalist>
             </td>
-            <td><%= submit_tag 'add' %></td>
+            <td><%= submit_tag 'Add' %></td>
           </tr>
         </table>
     <% end %>
@@ -87,7 +87,7 @@
                 <% end %>
               </datalist>
             </td>
-            <td><%= submit_tag 'add' %></td>
+            <td><%= submit_tag 'Add' %></td>
           </tr>
         </table>
     <% end %>
@@ -107,7 +107,7 @@
           </tr>
       <% end %>
       <tr>
-        <td colspan="2">Positions need to be added in DFUNKT.</td>
+        <td colspan="2">Positions need to be added in DFUNKT to a role.</td>
       </tr>
     </table>
   </div>

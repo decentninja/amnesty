@@ -3,6 +3,7 @@
       <thead>
       <tr>
         <th>Name</th>
+        <th>Students</th>
         <th>Privileges</th>
         <th>Positions</th>
         <th></th>
@@ -12,6 +13,11 @@
       <% @roles.each do |role| %>
           <tr>
             <td><%= role.name %></td>
+            <td>
+              <% role.role_assignments.map(&:student).each do |student| %>
+                <%= link_to(student.first_name + ' ' + student.last_name, student) %>,
+              <% end %>
+            </td>
             <td>
               <% role.privileges.each do |priv| %>
                   <%= link_to priv.name, priv %>
