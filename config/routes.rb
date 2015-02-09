@@ -1,4 +1,6 @@
 Amnesty::Application.routes.draw do
+  get "static_pages/apidoc"
+
   resources :roles do
     member do
       post 'add_student'

@@ -13,29 +13,29 @@
           <h1>Amnesty</h1>
           <nav>
             <%= link_to(students_url, {class: if current_page?(students_url) then 'current' else '' end}) do %>
-            <h2>Students</h2>
+                <h2>Students</h2>
 
-            <p>What roles, positions and cherry-picked privileges individual students has.</p>
+                <p>What roles, positions and cherry-picked privileges individual students has.</p>
             <% end %>
             <%= link_to(roles_url, {class: if current_page?(roles_url) then 'current' else '' end}) do %>
-            <h2>Roles</h2>
+                <h2>Roles</h2>
 
-            <p>Which position and or students have a certain role and what privileges are associated with that role.</p>
+                <p>Which position and or students have a certain role and what privileges are associated with that role.</p>
             <% end %>
             <%= link_to(privileges_url, {class: if current_page?(privileges_url) then 'current' else '' end}) do %>
-            <h2>Privileges</h2>
+                <h2>Privileges</h2>
 
-            <p>Which roles and cherry-picked students have certain privilege.</p>
-            <% end %>
+                <p>Which roles and cherry-picked students have certain privilege.</p>
+                <% end %>
             <%= link_to(positions_url, {class: if current_page?(positions_url) then 'current' else '' end}) do %>
-            <h2>Positions</h2>
+                <h2>Positions</h2>
 
-            <p>What roles are automatically given to students with a particular position in DFUNKT.</p>
+                <p>What roles are automatically given to students with a particular position in DFUNKT.</p>
             <% end %>
-            <a href="#">
+            <%= link_to(static_pages_apidoc_path, {class: if current_page?(static_pages_apidoc_path) then 'current' else '' end}) do %>
               <h2>API</h2>
               <p>Documentation on how to talk to Amnesty.</p>
-            </a>
+            <% end %>
           </nav>
         </header>
 
