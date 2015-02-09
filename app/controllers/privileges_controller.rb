@@ -1,5 +1,5 @@
 class PrivilegesController < ApplicationController
-  before_action :set_privilege, only: [:show, :edit, :update, :destroy]
+  before_action :set_privilege, only: [:show, :edit, :update, :destroy, :add_role, :remove_role, :add_student, :remove_student]
 
   # GET /privileges
   # GET /privileges.json
@@ -14,19 +14,46 @@ class PrivilegesController < ApplicationController
   end
 
   def add_role
-
+    role = Role.where("name like ?", params[:role_name])[0]
+    if role == nil
+      @privilege.errors.add(:role_name, 'does not exist. Go to the roles tab and create it!')
+    else
+      if @privilege.roles.include?(role)
+        @privilege.errors.add(:role_name, 'is already added.')
+      else
+        @privilege.assign(role, params[:expire])
+      end
+    end
+    render 'show'
   end
 
   def remove_role
-
+    role = Role.find(params[:role_id])
+    @privilege.roles.delete(role)
+    render 'show'
   end
 
   def add_student
-
+    if !params[:student_name].include?(' ')
+      params[:student_name] += ' '
+    end
+    student = Student.where("(first_name || ' ' || last_name) like ?", params[:student_name])[0]
+    if student == nil
+      @privilege.errors.add(:student_name, 'does not exist. Go to the roles tab and create it!')
+    else
+      if student.roles.include?(@privilege)
+        @privilege.errors.add(:student_name, 'is already added.')
+      else
+        @privilege.assign(student, params[:expire])
+      end
+    end
+    render 'show'
   end
 
   def remove_student
-
+    student = Student.find(params[:student_id])
+    @privilege.students.delete(student)
+    render 'show'
   end
 
   # POST /privileges
