@@ -50,12 +50,18 @@
           <tr>
             <th>Name</th>
             <th>Expires*</th>
+            <th>Privileges</th>
             <th></th>
           </tr>
           <% @student.role_assignments.each do |assignment| %>
               <tr>
                 <td><%= link_to(assignment.role.name, assignment.role) %></td>
                 <td><%= assignment.expires %></td>
+                <td>
+                  <% assignment.role.privileges.each do |priv| %>
+                    <%= link_to(priv.name, priv) %>
+                  <% end %>
+                </td>
                 <td><%= link_to 'Remove', action: :remove_role, role_id: assignment.role.id %></td>
               </tr>
           <% end %>
@@ -69,6 +75,7 @@
               </datalist>
             </td>
             <td><%= date_field '', 'expire', include_blank: true %></td>
+            <td></td>
             <td><%= submit_tag 'Add' %></td>
           </tr>
         </table>

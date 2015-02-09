@@ -56,10 +56,11 @@ class StudentsController < ApplicationController
   # POST /students
   # POST /students.json
   def create
-    @student = Student.create(student_params)
+    @student = Student.new(student_params)
+    @student.save
 
     respond_to do |format|
-      format.html { render 'show' }
+      format.html { redirect_to @student, notice: 'Student was successfully created.' }
       format.json { render json: @student.errors, status: :unprocessable_entity }
     end
   end

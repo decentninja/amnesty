@@ -42,6 +42,7 @@
           <tr>
             <th>Name</th>
             <th>Expires*</th>
+            <th>Students</th>
             <th></th>
           </tr>
           <% @privilege.roles.each do |role| %>
@@ -49,6 +50,11 @@
               <tr>
                 <td><%= link_to(role.name, role) %></td>
                 <td><%= assignment.expires %></td>
+                <td>
+                  <% role.role_assignments.map(&:student).flatten.each do |student| %>
+                      <%= link_to student.first_name + ' ' + student.last_name, student %>
+                  <% end %>
+                </td>
                 <td><%= link_to 'Remove', action: :remove_role, role_id: role.id %></td>
               </tr>
           <% end %>
@@ -62,6 +68,7 @@
               </datalist>
             </td>
             <td><%= date_field '', 'expire', include_blank: true %></td>
+            <td></td>
             <td><%= submit_tag 'Add' %></td>
           </tr>
         </table>

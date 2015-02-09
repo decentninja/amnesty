@@ -8,7 +8,6 @@ class Position < ActiveRecord::Base
     roles.flat_map(&:current_privileges)
   end
 
-
   def self.positions_for(ugid)
     DFUNKT::Positions.fetch(ugid)
   end

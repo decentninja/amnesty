@@ -92,6 +92,10 @@ header a h2 {
     padding-right: 0.5em;
 }
 
+.layoutlayout td {
+    max-width: 15em;
+}
+
 .page thead {
     text-align: center;
 }

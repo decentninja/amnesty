@@ -1,19 +1,86 @@
-<p id="notice"><%= notice %></p>
+<div class="actions">
+  <%= link_to 'Back', positions_path %> |
+  <% if @position.errors.any? %>
+      <% @position.errors.full_messages.each do |msg| %>
+          <span class="error"><%= msg %></span>
+      <% end %>
+  <% end %>
+  <span id="notice"><%= notice %></span>
+</div>
 
-<p>
-  <strong>First name:</strong>
-  <%= @position.name %>
-</p>
+<div class="layoutlayout">
+  <div>
+    <h2>Info</h2>
+    <table>
+      <tr>
+        <th>Name</th>
+        <td><%= @position.name %></td>
+      </tr>
+      <tr>
+        <th>Created at</th>
+        <td><%= @position.created_at %></td>
+      </tr>
+      <tr>
+        <th>Updated at</th>
+        <td><%= @position.updated_at %></td>
+      </tr>
+    </table>
+  </div>
 
-<p>
-	<strong>
-		Privileges:
-	</strong>
-</p>
-<p>
-	<% @position.privileges.each do |privilege| %>
-		<p>
-			<%= privilege.name %>
-		</p>
-	<% end -%>
-</p>
+  <div>
+    <h2>Roles</h2>
+    <%= form_tag add_role_position_path do %>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Privileges</th>
+            <th></th>
+          </tr>
+          <% @position.roles.each do |role| %>
+              <tr>
+                <td><%= link_to(role.name, role) %></td>
+                <td>
+                  <% role.privileges.each do |privilege| %>
+                        <%= link_to(privilege.name, privilege) %>
+                    <% end %>
+                </td>
+                <td><%= link_to 'Remove', action: :remove_role, role_id: role.id %></td>
+              </tr>
+          <% end %>
+          <tr>
+            <td>
+              <input type="text" name="role_name" list="roles" placeholder="Enter name">
+              <datalist id="roles">
+                <%= (Role.all - @position.roles).each do |role| %>
+                    <option value="<%= role.name %>"></option>
+                <% end %>
+              </datalist>
+            </td>
+            <td></td>
+            <td><%= submit_tag 'Add' %></td>
+          </tr>
+        </table>
+    <% end %>
+  </div>
+
+  <div>
+    <h2>Students</h2>
+    <table>
+      <tr>
+        <th>Name</th>
+      </tr>
+      <tr><td>TODO</td></tr>
+      <% if false %>
+          <% @position.students.each do |student| %>
+              <tr>
+                <td><%= link_to student.first_name + ' ' + student.last_name, student %></td>
+              </tr>
+          <% end %>
+      <% end %>
+      <tr>
+        <td>Positions assignment need to be done in DFUNKT.</td>
+      </tr>
+    </table>
+  </div>
+
+</div>

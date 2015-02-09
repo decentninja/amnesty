@@ -1,26 +1,39 @@
 <table>
   <thead>
-    <tr>
-      <th>Fname</th>
-      <th>Held?</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Students</th>
+        <th>Roles</th>
+        <th>Privileges given though roles</th>
+        <th></th>
+      </tr>
   </thead>
 
   <tbody>
-    <% @students.each do |student| %>
-      <tr>
-        <td><%= student.first_name %></td>
-        <td><%= student.last_name %></td>
-        <td><%= student.ugid %></td>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+      <% @positions.each do |position| %>
+          <tr>
+            <td><%= position.name %></td>
+            <td>
+              <% if false %>
+                  <% position.students.each do |student| %>
+                      <%= link_to student.first_name + ' ' + student.last_name, student %>
+                  <% end %>
+              <% end %>TODO
+            </td>
+            <td>
+              <% position.roles.each do |role| %>
+                  <%= link_to role.name, role %>,
+              <% end %>
+            </td>
+            <td>
+              <% position.privileges do |privilege| %>
+                  <%= link_to privilege.name, privilege %>,
+              <% end %>
+            </td>
+            <td><%= link_to 'Details', position %></td>
+          </tr>
+      <% end %>
   </tbody>
 </table>
 
-<br>
+<p>You can not destroy or create positions here, only assign roles.</p>

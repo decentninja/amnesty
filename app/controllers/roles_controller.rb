@@ -28,15 +28,11 @@ class RolesController < ApplicationController
   # POST /roles.json
   def create
     @role = Role.new(role_params)
+    @role.save
 
     respond_to do |format|
-      if @role.save
         format.html { redirect_to @role, notice: 'Role was successfully created.' }
         format.json { render action: 'show', status: :created, location: @role }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @role.errors, status: :unprocessable_entity }
-      end
     end
   end
 
