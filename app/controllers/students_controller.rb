@@ -13,6 +13,27 @@ class StudentsController < ApplicationController
   def show
   end
 
+  # GET /student/
+  def have_privilege
+    begin
+      if params[:name]
+        student = Student.where("(first_name || ' ' || last_name) like ?", params[:name])[0]
+      elsif params[:ugid]
+        student = Student.find_by_ugid(params[:ugid])
+      elsif params[:id]
+        student = Student.find(params[:id])
+      end
+    rescue ActiveRecord::RecordNotFound
+    end
+    if student.nil?
+      render text: "#{params[:name] or params[:ugid] or params[:id]} was not found", status: 404
+    elsif student.current_privilege_names.include?(params[:privilege])
+      render text: "#{student.first_name} #{student.last_name} have Amnesty's permission to #{params[:privilege]}!", status: 200
+    else
+      render text: "#{student.first_name} #{student.last_name} does not have Amnesty's permission to #{params[:privilege]}!", status: 550
+    end
+  end
+
   def add_role
     role = Role.where("name like ?", params[:role_name])[0]
     if role == nil
@@ -90,15 +111,15 @@ class StudentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_student
-      @student = Student.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      @student = Student.find_by_ugid(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_student
+    @student = Student.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    @student = Student.find_by_ugid(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def student_params
-      params.require(:student).permit(:first_name, :last_name, :ugid)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def student_params
+    params.require(:student).permit(:first_name, :last_name, :ugid)
+  end
 end

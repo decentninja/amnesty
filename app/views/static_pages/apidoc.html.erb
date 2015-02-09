@@ -1,0 +1,66 @@
+<p>Remember to <b>ALWAYS</b> query Amnesty when doing <b>ANYTHING</b> that needs permission in another system. <b>NEVER EVER cache any information</b> from Amnesty as this can change at any moment.</b> This is security 101, Principle of Complete Mediation
+
+<p>Amnesty is a right and permission system. This guide will explain the some of the more intricate parts of Amnesty and how other applications can communicate with Amnesty.</p>
+
+<p>Amnesty have relations between students, roles, positions, and privileges. The system can be viewed from multiple angles, represented by the tabs above.<p>
+
+<p><b>Privileges</b> are represented as simple text strings in Amnesty. A student can get a permission in different ways. Either by having the permission "cherry-picked", that is, assigned directly to the student or given by a role that the student are assigned to. <b>Students</b> are represented by their UGID, that is user global id. The same UGID that KTH and all of Datasektion's system use. <b>Positions</b> are automatically assigned from DFUNKT and have roles that are assigned to all students with positions in that system. So <b>roles</b> are an abstract consept used only in this system to link privileges to students.</p>
+
+<p>Just like the system can be viewed from different angles can you query the system from multiple directions but the preferred way to talk to Amnesty is on a student-privilege basis using the have_privilege url.</p>
+
+
+<h2>Have_privilege</h2>
+<p>Your application should not dabble in Amnesty details so this route is almost always the best way.</p>
+<p>Do a http(s) GET query to <a href="#">/students/have_privilege</a> with a student and a privilege as get parameter. You will get back a 200 "X have Amnesty's permission to Y".</p>
+
+<h3>Example</h3>
+<code>
+  <pre><a href="/students/have_privilege/?name=Andreas%20Linn&privilege=MetaTV"><%= "#{request.protocol}#{request.host_with_port}" %>/students/have_privilege/?name=Andreas%20Linn&privilege=MetaTV</a></pre>
+</code>
+<h4>Result</h4>
+<code><pre>Andreas Linn have Amnesty's permission to MetaTV!</pre></code>
+
+<h4>Parameters</h4>
+<p>As different applications have different ways to identify users we have included multiple ways to represent the student in the query.</p>
+<table>
+
+</table>
+
+<h4>Fail</h4>
+
+
+<h2>Student</h2>
+<h3>All students</h3>
+<a href="/students.json">/students.json</a>
+<p>Will give you all students and their privileges.</p>
+<code><pre>
+[
+   {
+      "id":1,
+      "first_name":"Andreas",
+      "last_name":"Linn",
+      "ugid":"too-cool-for-ugid",
+      "url":"http://localhost:3000/students/1.json"
+   },
+   {
+      "id":13,
+      "first_name":"Charles",
+      "last_name":"Darwin",
+      "ugid":null,
+      "url":"http://localhost:3000/students/13.json"
+   },
+   {
+      "id":15,
+      "first_name":"bla",
+      "last_name":"bla",
+      "ugid":null,
+      "url":"http://localhost:3000/students/15.json"
+   }, ...
+]</pre></code>
+
+<h2>Role</h2>
+
+<h2>Privilege</h2>
+
+<h2>Positions</h2>
+<p>You can't query positions from Amnesty as they are a part of DFUNKT and should be queried from there.</p>
