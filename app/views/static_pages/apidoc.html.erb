@@ -8,7 +8,6 @@
 
 <p>Just like the system can be viewed from different angles can you query the system from multiple directions. The preferred way to talk to Amnesty is on a student-privilege basis using the have_privilege url.</p>
 
-
 <h2>Have_privilege</h2>
 <p>Your application should not dabble in Amnesty details so this route is almost always the best way.</p>
 <p>Do a http(s) GET query to <a href="/students/have_privilege/">/students/have_privilege</a> with a student and a privilege as get parameter. You will get back a 200 "X have Amnesty's permission to Y". If the student can't be found or does not have privileges a http error will be sent with a explaining message.</p>
@@ -115,3 +114,4 @@
     <td>Details for a specific privilege.</td>
   </tr>
 </table>
+
