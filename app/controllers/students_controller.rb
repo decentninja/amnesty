@@ -23,11 +23,16 @@ class StudentsController < ApplicationController
       elsif params[:id]
         student = Student.find(params[:id])
       end
+      privilege = Privilege.find_by_name(params[:privilege])
     rescue ActiveRecord::RecordNotFound
     end
-    if student.nil?
-      render text: "#{params[:name] or params[:ugid] or params[:id]} was not found", status: 404
-    elsif student.current_privilege_names.include?(params[:privilege])
+    if not (params[:ugid] and params[:name] and params[:id] and params[:privilege])
+      render text: 'You will need to specify the parameters to this route as http GET parameters. See http://localhost:3000/static_pages/apidoc for more information.', status: 406
+    elsif student.nil?
+      render text: "Student #{params[:name] or params[:ugid] or params[:id]} was not found.", status: 404
+    elsif privilege.nil?
+      render text: "Privilege #{params[:privilege]} was not found.", status: 404
+    elsif student.current_privileges.include?(privilege)
       render text: "#{student.first_name} #{student.last_name} have Amnesty's permission to #{params[:privilege]}!", status: 200
     else
       render text: "#{student.first_name} #{student.last_name} does not have Amnesty's permission to #{params[:privilege]}!", status: 550
