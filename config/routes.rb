@@ -38,6 +38,9 @@ Amnesty::Application.routes.draw do
     end
   end
 
+  get 'callback/:token', to: 'authentications#callback'
+  get 'logout', to: 'authentications#logout', as: 'logout'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

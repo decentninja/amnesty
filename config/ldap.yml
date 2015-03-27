@@ -1,0 +1,19 @@
+common: &common
+  base_dn: ou=Addressbook,dc=kth,dc=se
+  fields:
+    first_name: givenName
+    last_name: sn
+    ugid: ugKthid
+
+development:
+  <<: *common
+  server: ldap.kth.se
+  port: 389
+
+test:
+  <<: *common
+
+production:
+  <<: *common
+  server: ldap.kth.se
+  port: 389

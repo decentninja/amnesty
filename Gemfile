@@ -47,3 +47,7 @@ gem 'active_model_serializers'
 group :development, :staging do
   gem 'pry-rails'
 end
+
+gem 'pundit'
+gem 'dotenv-rails'
+gem 'ldap_lookup', git: 'https://github.com/Frost/ldap_lookup.git'

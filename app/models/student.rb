@@ -1,5 +1,6 @@
 # Student, person, cal them what you like.
 class Student < ActiveRecord::Base
+  include LDAPLookup::Importable
   has_many :privilege_assignments, as: :privileged, dependent: :destroy
   has_many :privileges, through: :privilege_assignments do
     def current
@@ -30,5 +31,10 @@ class Student < ActiveRecord::Base
 
   def as_json(_options = nil)
     current_privileges
+  end
+
+  def self.find_or_create_from_ldap(options = {})
+    return nil unless options[:ugid].present?
+    Student.where(options).first || from_ldap(options).tap { |u| u.save }
   end
 end

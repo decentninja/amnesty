@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :update, :destroy, :add_role, :remove_role, :add_privilege, :remove_privilege]
+  skip_before_filter :authenticate!, :only => :have_privilege
 
   # GET /students
   # GET /students.json
