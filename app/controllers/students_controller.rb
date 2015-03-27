@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :update, :destroy, :add_role, :remove_role, :add_privilege, :remove_privilege]
   skip_before_filter :authenticate!, :only => :have_privilege
+  skip_before_filter :amnesty_admin, :only => :have_privilege
 
   # GET /students
   # GET /students.json
@@ -27,7 +28,7 @@ class StudentsController < ApplicationController
       privilege = Privilege.find_by_name(params[:privilege])
     rescue ActiveRecord::RecordNotFound
     end
-    if not (params[:ugid] and params[:name] and params[:id] and params[:privilege])
+    if not ((params[:ugid] or params[:name] or params[:id]) and params[:privilege])
       render text: 'You will need to specify the parameters to this route as http GET parameters. See http://localhost:3000/static_pages/apidoc for more information.', status: 406
     elsif student.nil?
       render text: "Student #{params[:name] or params[:ugid] or params[:id]} was not found.", status: 404

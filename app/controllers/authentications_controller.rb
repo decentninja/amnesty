@@ -1,8 +1,8 @@
 require "net/http"
 
 class AuthenticationsController < ApplicationController
-  skip_before_filter :authenticate!, only: :callback
-  skip_before_filter :ensure_organisation!
+  skip_before_filter :authenticate!
+  skip_before_filter :amnesty_admin
 
   def callback
     response = Net::HTTP.get_response(URI("#{ENV['LOGIN_ENDPOINT']}/verify/#{params[:token]}.json"))

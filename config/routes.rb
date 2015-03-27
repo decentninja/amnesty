@@ -1,5 +1,6 @@
 Amnesty::Application.routes.draw do
   get "static_pages/apidoc"
+  get "static_pages/no_amnesty"
 
   resources :roles do
     member do

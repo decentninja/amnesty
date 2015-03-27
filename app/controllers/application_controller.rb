@@ -1,10 +1,13 @@
 require 'pundit'
+
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   include Pundit
   protect_from_forgery with: :exception
   before_filter :authenticate!
+  before_filter :amnesty_admin
 
 
   def current_user
@@ -15,6 +18,13 @@ class ApplicationController < ActionController::Base
 
   def authenticate!
     redirect_to_login unless current_user.present?
+  end
+
+  def amnesty_admin
+    have_priv = current_user.current_privileges.include?(Privilege.find_by_name("Amnesty Admin"))
+    unless have_priv
+      redirect_to '/static_pages/no_amnesty'
+    end
   end
 
   def redirect_to_login
