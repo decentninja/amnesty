@@ -10,11 +10,11 @@
 
 <h2>Have_privilege</h2>
 <p>Your application should not dabble in Amnesty details so this route is almost always the best way.</p>
-<p>Do a http(s) GET query to <a href="/students/have_privilege/">/students/have_privilege</a> with a student and a privilege as get parameter. You will get back a 200 "X have Amnesty's permission to Y". If the student can't be found or does not have privileges a http error will be sent with a explaining message.</p>
+<p>Do a http(s) GET query to <a href="/have_privilege/">/have_privilege</a> with a student and a privilege as get parameter. You will get back a 200 "X have Amnesty's permission to Y". If the student can't be found or does not have privileges a http error will be sent with a explaining message.</p>
 
 <h3>Example</h3>
 <code>
-  <pre><a href="/students/have_privilege/?name=Andreas%20Linn&privilege=MetaTV"><%= "#{request.protocol}#{request.host_with_port}" %>/students/have_privilege/?name=Andreas%20Linn&privilege=MetaTV</a></pre>
+  <pre><a href="<%= "#{request.protocol}#{request.host_with_port}" %>/have_privilege/?name=Andreas%20Linn&privilege=Amnesty%20Admin"><%= "#{request.protocol}#{request.host_with_port}" %>/have_privilege/?name=Andreas%20Linn&privilege=Amnesty%20Admin</a></pre>
 </code>
 
 <h3>Parameters</h3>

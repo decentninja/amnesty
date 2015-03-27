@@ -32,7 +32,7 @@
 
                 <p>What roles are automatically given to students with a particular position in DFUNKT.</p>
             <% end %>
-            <%= link_to(static_pages_apidoc_path, {class: if current_page?(static_pages_apidoc_path) then 'current' else '' end}) do %>
+            <%= link_to(apidoc_path, {class: if current_page?(apidoc_path) then 'current' else '' end}) do %>
               <h2>API</h2>
               <p>Documentation on how to talk to Amnesty.</p>
             <% end %>

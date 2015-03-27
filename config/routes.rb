@@ -1,6 +1,6 @@
 Amnesty::Application.routes.draw do
-  get "static_pages/apidoc"
-  get "static_pages/no_amnesty"
+  get 'apidoc', to:'static_pages#apidoc'
+  get 'static_pages/no_amnesty'
 
   resources :roles do
     member do
@@ -13,6 +13,8 @@ Amnesty::Application.routes.draw do
     end
   end
 
+  get 'have_privilege', to: 'students#have_privilege'
+
   resources :students do
     member do
       post 'add_role'
@@ -20,7 +22,6 @@ Amnesty::Application.routes.draw do
       post 'add_privilege'
       get 'remove_privilege'
     end
-    get 'have_privilege', on: :collection
   end
 
   resources :privileges do
